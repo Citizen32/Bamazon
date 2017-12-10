@@ -33,18 +33,62 @@ function inventory(){
       console.log("Department: " + data[i].department_name);
       console.log("Price: " + "$" + data[i].price);
     }
+
+    console.log("****************************************");
+    purchase();
   })
 }
 inventory();
 
 
-// 2. The first should ask them the ID of the product they would like to buy.
-//==============================================================================
+
+function purchase(){
+
+  inquirer.prompt([
+    // 2. The first should ask them the ID of the product they would like to buy.
+    //==============================================================================
+    {
+      name: 'item_id',
+      type: 'input',
+      message: 'Select the "Item ID" of the product you wish to buy.'
+    },
+    // 3. The second message should ask how many units of the product they would like to buy.
+    //==============================================================================
+    {
+      name: 'quantity',
+      type: 'input',
+      message: 'How many units of this product would you like to buy?'
+    }
+
+  ]).then(function (input){
+    var item = input.item_id;
+    var quantity = input.quantity;
+
+    var queryStr = "SELECT * FROM products WHERE ?";
+
+    connection.query(queryStr, {item_id: item}, function(err, data){
+      if (err) throw err;
+
+      if (data.length === 0){
+        console.log("invalid input. Please select an item ID:");
+        inventory();
+      }
+      else {
+        var productData = data [0];
+
+        if (quantity <= productData.stock_quantity){
+          console.log("Order being processed!");
+
+          var updateQueryStr = "Stock Update= " + (productData.stock_quantity - quantity) + 'WHERE item_id= ' + item;
+          console.log('updateQueryStr= ' + updateQueryStr);
+        }
+      }
+    })
+  })
+}
 
 
 
-// 3. The second message should ask how many units of the product they would like to buy.
-//==============================================================================
 
 
 
