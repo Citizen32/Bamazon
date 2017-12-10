@@ -16,11 +16,26 @@ connection.connect(function(err){
  console.log("Connected as id: " + connection.threadId);
 });
 
-	
 
 // 1. Running this application will first display all of the items available for sale. Include the ids, names, and prices of products for sale.
 //==============================================================================
+function inventory(){
+  var queryStr = "SELECT * FROM products";
 
+  connection.query(queryStr, function(err, data){
+    if (err) throw err;
+  //  console.log(data);
+
+    for (var i = 0;  i < data.length; i++){
+      console.log("=======================================")
+      console.log("Item ID : " + data[i].item_id);
+      console.log("Product: " + data[i].product_name);
+      console.log("Department: " + data[i].department_name);
+      console.log("Price: " + "$" + data[i].price);
+    }
+  })
+}
+inventory();
 
 
 // 2. The first should ask them the ID of the product they would like to buy.
