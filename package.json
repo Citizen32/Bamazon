@@ -1,0 +1,23 @@
+{
+  "name": "bamazon",
+  "version": "1.0.0",
+  "description": "CLI-based app using MySQL to store data",
+  "main": "bamazonCustomer.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Citizen32/Bamazon.git"
+  },
+  "author": "David Morales",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Citizen32/Bamazon/issues"
+  },
+  "homepage": "https://github.com/Citizen32/Bamazon#readme",
+  "dependencies": {
+    "inquirer": "^4.0.1",
+    "mysql": "^2.15.0"
+  }
+}
