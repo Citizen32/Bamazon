@@ -79,7 +79,10 @@ function purchase(){
         console.log("========================================");
         console.log("Sorry, Insuficient Quantity.");
         console.log("========================================");
+
+        // YOU CAN EITHER END THE CONNECTION OR RUN THE "inventory function" again to select a different item or amount.
         connection.end();
+        // inventory();
       }
       else{
         // UPDATE STOCK ==============================================================
